@@ -1,3 +1,7 @@
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 
 import './App.css'
 import Footer from './components/Footer';
@@ -6,13 +10,24 @@ import ListEmployeeComponent from './components/ListEmployeeComponent';
 
 function App() {
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <ListEmployeeComponent/>,
+    },
+    {
+      path: "/employees",
+      element: <ListEmployeeComponent/>
+    }
+  ]);
+
   return (
     <>
-      <Header/>
-      <div className="container">
-        <ListEmployeeComponent/>
-      </div>
-      <Footer/>
+        <Header/>
+        <div className="container">
+          <RouterProvider router={router} />   
+        </div>
+        <Footer/>
     </>
   )
 }
