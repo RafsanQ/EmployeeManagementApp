@@ -5,25 +5,25 @@ import {
 
 import './App.css'
 import Footer from './components/Footer';
-import Header from './components/Header';
-import ListEmployeeComponent from './components/ListEmployeeComponent';
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
 
 function App() {
 
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <ListEmployeeComponent/>,
+      element: <Home/>,
     },
     {
       path: "/employees",
-      element: <ListEmployeeComponent/>
+      element: <Home/>
     }
   ]);
 
   return (
     <>
-        <Header/>
+        <Navbar/>
         <div className="container">
           <RouterProvider router={router} />   
         </div>

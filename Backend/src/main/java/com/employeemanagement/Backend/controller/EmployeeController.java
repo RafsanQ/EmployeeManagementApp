@@ -25,4 +25,11 @@ public class EmployeeController {
         return employeeRepository.save(employee);
     }
 
+    // Delete an employee
+    @PutMapping("/employee/delete/:employeeId")
+    public Employee deleteNewEmployee(@RequestParam long employeeId){
+        System.out.println(employeeId);
+        return new Employee();
+    }
+
 }
