@@ -12,15 +12,7 @@ function NewEmployee() {
 
     const navigate = useNavigate();
 
-    // const onInputChange = (event) => {
-    //     // setUser({
-    //     //     ...user,
-    //     //     [event.target.name]: event.target.value
-    //     // });
-    //     // console.log(event.target.name);
-    // }
-
-    function changeFirstName(event) {
+    function onChangeFunction(event) {
         setUser({ 
             ...user,
             [event.target.name]: event.target.value
@@ -43,11 +35,11 @@ function NewEmployee() {
                     <form onSubmit={(e) => onSubmit(e)}>
                         
                         <div className="mb-3 d-flex flex-row justify-content-center">
-                            <input type="text" className="form-control w-25 mx-2 d-inline" placeholder="First Name" value={user.firstName} name="firstName" onChange={e => changeFirstName(e)}/>
-                            <input type="text" className="form-control w-25 mx-2 d-inline" placeholder="Last Name" name="lastName" value={user.lastName} onChange={e => changeFirstName(e)}/>
+                            <input type="text" className="form-control w-25 mx-2 d-inline" placeholder="First Name" value={user.firstName} name="firstName" onChange={e => onChangeFunction(e)}/>
+                            <input type="text" className="form-control w-25 mx-2 d-inline" placeholder="Last Name" name="lastName" value={user.lastName} onChange={e => onChangeFunction(e)}/>
                         </div>
                         <div className="mb-3 d-flex flex-row justify-content-center">
-                            <input type="text" className="form-control w-50" placeholder="Email" name="email" value={user.email} onChange={e => changeFirstName(e)} />
+                            <input type="text" className="form-control w-50" placeholder="Email" name="email" value={user.email} onChange={e => onChangeFunction(e)} />
                         </div>
                         <div className="mb-3 d-flex flex-row justify-content-center">
                             <button type="submit" className="btn btn-primary ">Submit</button>
