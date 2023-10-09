@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import EmployeeService from "../../services/EmployeeService";
 
 function NewEmployee() {
 
@@ -9,7 +10,7 @@ function NewEmployee() {
         email: ""
     })
 
-   
+    const navigate = useNavigate();
 
     // const onInputChange = (event) => {
     //     // setUser({
@@ -24,8 +25,12 @@ function NewEmployee() {
             ...user,
             [event.target.name]: event.target.value
         })
+    }
 
-        
+    async function onSubmit(event){
+        event.preventDefault();
+        await EmployeeService.createNewEmployee(user);
+        navigate('/');
     }
 
     return (
@@ -35,17 +40,20 @@ function NewEmployee() {
                     <h2 className="text-center m-4">
                         Register New Employee
                     </h2>
-                    <div className="mb-3 d-flex flex-row justify-content-center">
-                        <input type="text" className="form-control w-25 mx-2 d-inline" placeholder="First Name" value={user.firstName} name="firstName" onChange={e => changeFirstName(e)}/>
-                        <input type="text" className="form-control w-25 mx-2 d-inline" placeholder="Last Name" name="lastName" value={user.lastName} onChange={e => changeFirstName(e)}/>
-                    </div>
-                    <div className="mb-3 d-flex flex-row justify-content-center">
-                        <input type="text" className="form-control w-50" placeholder="Email" name="email" value={user.email} onChange={e => changeFirstName(e)} />
-                    </div>
-                    <div className="mb-3 d-flex flex-row justify-content-center">
-                        <button type="submit" className="btn btn-primary ">Submit</button>
-                        <Link to="/employees" className="btn btn-outline-danger mx-2">Cancel</Link>
-                    </div>         
+                    <form onSubmit={(e) => onSubmit(e)}>
+                        
+                        <div className="mb-3 d-flex flex-row justify-content-center">
+                            <input type="text" className="form-control w-25 mx-2 d-inline" placeholder="First Name" value={user.firstName} name="firstName" onChange={e => changeFirstName(e)}/>
+                            <input type="text" className="form-control w-25 mx-2 d-inline" placeholder="Last Name" name="lastName" value={user.lastName} onChange={e => changeFirstName(e)}/>
+                        </div>
+                        <div className="mb-3 d-flex flex-row justify-content-center">
+                            <input type="text" className="form-control w-50" placeholder="Email" name="email" value={user.email} onChange={e => changeFirstName(e)} />
+                        </div>
+                        <div className="mb-3 d-flex flex-row justify-content-center">
+                            <button type="submit" className="btn btn-primary ">Submit</button>
+                            <Link to="/employees" className="btn btn-outline-danger mx-2">Cancel</Link>
+                        </div>
+                    </form>    
                 </div>
             </div>
         </div>
