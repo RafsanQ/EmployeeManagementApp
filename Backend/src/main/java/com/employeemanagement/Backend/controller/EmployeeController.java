@@ -1,5 +1,6 @@
 package com.employeemanagement.Backend.controller;
 
+import com.employeemanagement.Backend.exception.EmployeeNotFoundException;
 import com.employeemanagement.Backend.model.Employee;
 import com.employeemanagement.Backend.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,12 @@ public class EmployeeController {
     @PostMapping("/employee")
     public Employee createNewEmployee(@RequestBody Employee employee){
         return employeeRepository.save(employee);
+    }
+
+    @GetMapping("/employee/{id}")
+    public Employee getEmployeeById(@PathVariable long id){
+        return employeeRepository.findById(id)
+                .orElseThrow(()-> new EmployeeNotFoundException(id));
     }
 
     // Delete an employee
