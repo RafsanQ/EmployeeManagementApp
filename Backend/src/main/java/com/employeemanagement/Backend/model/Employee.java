@@ -10,7 +10,7 @@ public class Employee {
     private long id;
     @Column
     private String firstName, lastName;
-    @Column
+    @Column(unique = true)
     private String email;
 
     public Employee(){}

@@ -29,7 +29,19 @@ public class EmployeeController {
     @GetMapping("/employee/{id}")
     public Employee getEmployeeById(@PathVariable long id){
         return employeeRepository.findById(id)
-                .orElseThrow(()-> new EmployeeNotFoundException(id));
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
+    }
+
+    @PutMapping("/employee/{id}")
+    public Employee updateEmployeeById(@PathVariable long id, @RequestBody Employee newUserData){
+        return employeeRepository.findById(id)
+                .map(employee -> {
+                    employee.setEmail(newUserData.getEmail());
+                    employee.setFirstName((newUserData.getFirstName()));
+                    employee.setLastName((newUserData.getLastName()));
+                    return employeeRepository.save(employee);
+                })
+                .orElseThrow(() -> new EmployeeNotFoundException(id));
     }
 
     // Delete an employee
