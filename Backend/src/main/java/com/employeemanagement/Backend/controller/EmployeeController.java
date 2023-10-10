@@ -45,10 +45,15 @@ public class EmployeeController {
     }
 
     // Delete an employee
-    @PutMapping("/employee/delete/:employeeId")
-    public Employee deleteNewEmployee(@RequestParam long employeeId){
-        System.out.println(employeeId);
-        return new Employee();
+    @DeleteMapping("/employee/{id}")
+    public String deleteNewEmployee(@PathVariable long id){
+        if(!employeeRepository.existsById(id)){
+            throw new EmployeeNotFoundException(id);
+        }
+
+        employeeRepository.deleteById(id);
+        return "User with id " + id + " has been deleted";
+
     }
 
 }
